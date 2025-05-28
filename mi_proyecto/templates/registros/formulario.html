@@ -1,0 +1,20 @@
+<!-- formulario.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Crear Registro</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Crear Registro</h1>
+    <form method="post" class="registro-form">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn">Guardar</button>
+    </form>
+    <a href="{% url 'lista_registros' %}">« Volver</a>
+  </div>
+</body>
+</html>

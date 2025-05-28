@@ -1,0 +1,26 @@
+<!-- lista.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Lista de Registros</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Lista de Registros</h1>
+    <a href="{% url 'crear_registro' %}" class="btn">+ Nuevo</a>
+    <ul class="registro-list">
+      {% for reg in items %}
+        <li>
+          <span class="fecha">{{ reg.fecha }}</span>
+          <strong>{{ reg.nombre }}</strong> – {{ reg.descripcion }}
+        </li>
+      {% empty %}
+        <li>No hay registros aún.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
