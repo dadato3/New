@@ -1,5 +1,5 @@
 from django import forms
-from .models import Registro, Venta
+from .models import Registro, Venta, Cliente
 from datetime import date
 
 
@@ -27,3 +27,12 @@ class VentaForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if not self.is_bound:
             self.fields['fecha'].initial = date.today()
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model  = Cliente
+        fields = ['telefono', 'nombre']
+        widgets = {
+            'telefono': forms.TextInput(attrs={'placeholder': '987654321'}),
+            'nombre':   forms.TextInput(attrs={'placeholder': 'Juan Pérez'}),
+        }

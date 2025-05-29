@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Eliminar Cliente</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="app-container">
+    {% include 'includes/sidebar.html' %}
+
+    <div class="content">
+      <h1>Eliminar Cliente</h1>
+      <p>¿Estás seguro que quieres eliminar a <strong>{{ cliente.nombre }}</strong> ({{ cliente.telefono }})?</p>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{% url 'clientes_home' %}" class="btn">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

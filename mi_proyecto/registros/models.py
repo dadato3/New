@@ -17,5 +17,14 @@ class Venta(models.Model):
     estado   = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='pendiente')
 
 
+class Cliente(models.Model):
+    telefono = models.CharField(
+        "Teléfono", 
+        max_length=20, 
+        primary_key=True,
+        help_text="Usado como ID único"
+    )
+    nombre = models.CharField("Nombre", max_length=100)
+
     def __str__(self):
         return f"{self.nombre} ({self.fecha})"

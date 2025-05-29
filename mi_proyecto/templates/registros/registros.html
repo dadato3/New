@@ -3,24 +3,100 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Dashboard</title>
+  <title>Registros / Ventas</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+    /* Ajustes mínimos para buscador y tabla */
+    .search-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .search-form input {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      flex: 1;
+      min-width: 150px;
+    }
+    .search-form button {
+      padding: 0.6rem 1.2rem;
+      background: #5563DE;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background .3s ease;
+    }
+    .search-form button:hover {
+      background: #4351b5;
+    }
+    .ventas-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .ventas-table th,
+    .ventas-table td {
+      padding: 0.75rem 1rem;
+      border: 1px solid #e1e4eb;
+      text-align: left;
+    }
+    .ventas-table th {
+      background: rgba(85,99,222,0.1);
+      font-weight: 600;
+    }
+    .ventas-table tbody tr:nth-child(even) {
+      background: #fbfbfb;
+    }
+  </style>
 </head>
 <body>
   <div class="app-container">
-    <!-- Sidebar -->
     <nav class="sidebar">
       <ul>
-        <li><a href="#">Ventas</a></li>
-        <li><a href="#">Registros</a></li>
-        <li><a href="#">Clientes</a></li>
-        <li><a href="#">Usuarios</a></li>
+        <li><a href="{% url 'ventas' %}">Ventas</a></li>
+        <li><a href="{% url 'registros' %}">Registros</a></li>
+        <li><a href="{% url 'clientes' %}">Clientes</a></li>
+        <li><a href="{% url 'usuarios' %}">Usuarios</a></li>
       </ul>
     </nav>
-    <!-- Contenido -->
+
     <div class="content">
-      <h1>Bienvenido al Dashboard</h1>
-      <p>Selecciona una opción del menú para comenzar.</p>
+      <h1>Ventas Registradas</h1>
+
+      <!-- Buscador -->
+      <form method="get" class="search-form">
+        <input type="text"   name="cliente"  placeholder="Cliente"  value="{{ q_cliente }}">
+        <input type="date"   name="fecha"    value="{{ q_fecha }}">
+        <input type="text"   name="licencia" placeholder="Licencia" value="{{ q_licencia }}">
+        <button type="submit">Buscar</button>
+      </form>
+
+      <table class="ventas-table">
+  <thead>…</thead>
+  <tbody>
+    {% for v in ventas %}
+    <tr>
+      <td>{{ v.cliente }}</td>
+      <td>{{ v.control }}</td>
+      <td>{{ v.licencia }}</td>
+      <td>{{ v.fecha }}</td>
+      <td>
+        {% if v.estado == 'pendiente' %}
+          <form action="{% url 'marcar_pagado' v.pk %}" method="post" style="display:inline">
+            {% csrf_token %}
+            <button type="submit" class="btn-small">Marcar como Pagado</button>
+          </form>
+        {% else %}
+          <span class="status-paid">Pagado</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
     </div>
   </div>
 </body>

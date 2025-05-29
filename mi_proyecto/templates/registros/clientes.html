@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Dashboard</title>
+  <title>Clientes</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -11,16 +11,22 @@
     <!-- Sidebar -->
     <nav class="sidebar">
       <ul>
-        <li><a href="#">Ventas</a></li>
-        <li><a href="#">Registros</a></li>
-        <li><a href="#">Clientes</a></li>
-        <li><a href="#">Usuarios</a></li>
+        <li><a href="{% url 'registros'       %}">Registros</a></li>
+        <li><a href="{% url 'ventas'          %}">Ventas</a></li>
+        <li><a href="{% url 'clientes_home'   %}">Clientes</a></li>
+        <li><a href="{% url 'usuarios'        %}">Usuarios</a></li>
       </ul>
     </nav>
+
     <!-- Contenido -->
     <div class="content">
-      <h1>Bienvenido al Dashboard</h1>
-      <p>Selecciona una opción del menú para comenzar.</p>
+      <h1>Gestión de Clientes</h1>
+      <div class="action-buttons">
+        <a href="{% url 'crear_cliente' %}"   class="btn">Crear Cliente</a>
+        <a href="#"                          class="btn">Modificar Cliente</a>
+        <a href="#"                          class="btn btn-danger">Eliminar Cliente</a>
+      </div>
+      <p class="small">* Para modificar o eliminar, primero busca al cliente (próxima versión).</p>
     </div>
   </div>
 </body>

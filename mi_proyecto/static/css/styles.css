@@ -324,3 +324,66 @@ html, body {
     width: 100%;
   }
 }
+
+/* Botón “Pagado” más llamativo */
+.btn-small {
+  background: linear-gradient(45deg, #2ecc71, #27ae60);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.btn-small:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(46, 204, 113, 0.8);
+  filter: brightness(1.1);
+}
+.btn-small:active {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 3px 8px rgba(46, 204, 113, 0.5);
+}
+
+
+/* Texto de “Pagado” */
+.status-paid {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+
+/* Sidebar links: fuerza mismo box en todos los estados */
+.sidebar a {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;     /* espaciado fijo */
+  box-sizing: border-box;    /* incluye padding en el ancho */
+  margin: 0;                 /* sin márgenes adicionales */
+  border: none;              /* sin borde al hacer focus/active */
+  outline: none;             /* quita outline por defecto */
+  text-align: left;
+  transition: background 0.2s ease; /* solo cambia fondo */
+}
+
+/* Hover y focus: cambia solo el fondo, no el padding ni el border */
+.sidebar a:hover,
+.sidebar a:focus {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Active: misma altura, solo otro fondo ligero */
+.sidebar a:active {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Asegúrate de que las <li> no tengan padding/margin dinámico */
+.sidebar ul,
+.sidebar li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
