@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Registrar Venta</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+    /* Layout completo */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+    .app-container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+    .sidebar {
+      width: 200px;
+      background: #2c3e50;
+      color: #fff;
+      padding: 1rem;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar li {
+      margin-bottom: 1rem;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: background .2s ease;
+    }
+    .sidebar a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .content {
+      flex: 1;
+      padding: 2rem;
+      background: #f5f6fa;
+      overflow-y: auto;
+    }
+
+    /* Formulario en columna */
+    .ventas-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .ventas-form .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+      display: block;
+    }
+    .ventas-form .form-group input,
+    .ventas-form .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .ventas-form .form-group input:focus,
+    .ventas-form .form-group select:focus {
+      outline: none;
+      border-color: #5563DE;
+      box-shadow: 0 0 5px rgba(85,99,222,0.3);
+    }
+    .ventas-form button {
+      align-self: flex-end;
+      padding: 0.8rem 1.5rem;
+      background: #5563DE;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background .3s;
+    }
+    .ventas-form button:hover {
+      background: #4351b5;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <ul>
+        <li><a href="{% url 'ventas' %}">Ventas</a></li>
+        <li><a href="{% url 'dashboard' %}">Registros</a></li>
+        <li><a href="{% url 'clientes' %}">Clientes</a></li>
+        <li><a href="{% url 'usuarios' %}">Usuarios</a></li>
+      </ul>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="content">
+      <h1>Registrar Venta</h1>
+
+      <form method="post" class="ventas-form">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ form.cliente.label_tag }}
+          {{ form.cliente }}
+        </div>
+        <div class="form-group">
+          {{ form.control.label_tag }}
+          {{ form.control }}
+        </div>
+        <div class="form-group">
+          {{ form.licencia.label_tag }}
+          {{ form.licencia }}
+        </div>
+        <div class="form-group">
+          {{ form.fecha.label_tag }}
+          {{ form.fecha }}
+        </div>
+        <div class="form-group">
+          {{ form.estado.label_tag }}
+          {{ form.estado }}
+        </div>
+
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

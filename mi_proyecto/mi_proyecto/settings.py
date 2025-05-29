@@ -60,18 +60,20 @@ ROOT_URLCONF = 'mi_proyecto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        # Le indicamos a Django que busque plantillas en BASE_DIR/templates
+        'DIRS': [ BASE_DIR / 'templates' ],  
+        # y que también busque en cada carpeta "templates/" de las apps
+        'APP_DIRS': True,      
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.request',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',  # <-- necesario para auth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
-
 WSGI_APPLICATION = 'mi_proyecto.wsgi.application'
 
 

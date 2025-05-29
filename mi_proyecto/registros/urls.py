@@ -1,9 +1,10 @@
-# registros/urls.py
-
 from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('',    views.lista_registros,  name='lista_registros'),
-    path('nuevo/', views.crear_registro, name='crear_registro'),
+    path('',         views.dashboard, name='dashboard'),
+    path('ventas/',views.ventas,    name='ventas'),
+    path('clientes/',views.clientes,  name='clientes'),
+    path('usuarios/',views.usuarios,  name='usuarios'),
+    path('registros/',views.registros,  name='registros'),
 ]

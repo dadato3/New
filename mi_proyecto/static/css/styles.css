@@ -127,3 +127,200 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+/* Contenedor principal: sidebar + contenido */
+.app-container {
+  display: flex;
+  height: 100vh;              /* ocupa toda la altura de la ventana */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background: #2c3e50;
+  color: white;
+  padding: 1rem;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar li {
+  margin: 1rem 0;
+}
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  transition: background .2s ease;
+}
+.sidebar a:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Zona de contenido */
+.content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background: #f5f6fa;
+}
+
+/* Que todo el body y html cubran el viewport */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Forzar que el contenedor principal ocupe toda la pantalla */
+.app-container {
+  display: flex;
+  height: 100vh;    /* 100% de la altura visible */
+  width: 100vw;     /* 100% del ancho visible */
+  overflow: hidden;
+}
+
+/* Sidebar fijo */
+.sidebar {
+  width: 200px;
+  background: #2c3e50;
+  /* resto de estilos... */
+}
+
+/* Zona de contenido que rellena lo que sobra */
+.content {
+  flex: 1;
+  background: #f5f6fa;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* Tabla de Ventas */
+.ventas-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.ventas-table th,
+.ventas-table td {
+  border: 1px solid #ccc;
+  padding: 0.8rem;
+  text-align: left;
+}
+.ventas-table th {
+  background: rgba(85,99,222,0.1);
+  font-weight: 600;
+}
+.ventas-form input,
+.ventas-form select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─── Contenedor de ventas ─── */
+.ventas-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 1.5rem auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* ─── Tabla/formulario ─── */
+.ventas-form table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.ventas-form th,
+.ventas-form td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+.ventas-form thead th {
+  background: #5563DE;
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid #4351b5;
+}
+.ventas-form tbody tr {
+  border-bottom: 1px solid #e1e4eb;
+}
+.ventas-form tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Inputs y selects a todo ancho */
+.ventas-form input,
+.ventas-form select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  transition: border-color .3s, box-shadow .3s;
+}
+.ventas-form input:focus,
+.ventas-form select:focus {
+  outline: none;
+  border-color: #5563DE;
+  box-shadow: 0 0 5px rgba(85,99,222,0.3);
+}
+
+/* Botón de registrar */
+.ventas-form .btn {
+  padding: 0.6rem 1.4rem;
+  background: #5563DE;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background .3s ease, transform .1s ease;
+}
+.ventas-form .btn:hover {
+  background: #4351b5;
+}
+.ventas-form .btn:active {
+  transform: scale(0.98);
+}
+
+/* Responsive: en pantallas muy estrechas, apila campos */
+@media (max-width: 600px) {
+  .ventas-form table,
+  .ventas-form thead,
+  .ventas-form tbody,
+  .ventas-form th,
+  .ventas-form td,
+  .ventas-form tr {
+    display: block;
+  }
+  .ventas-form thead {
+    display: none;
+  }
+  .ventas-form tr {
+    margin-bottom: 1rem;
+  }
+  .ventas-form td {
+    padding: 0.5rem 0;
+    position: relative;
+  }
+  .ventas-form td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #555;
+  }
+  .ventas-form .btn {
+    width: 100%;
+  }
+}
