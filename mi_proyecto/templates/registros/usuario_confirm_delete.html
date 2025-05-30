@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Eliminar Usuario</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="app-container">
+    {% include 'includes/sidebar.html' %}
+    <div class="content">
+      <div class="confirm-container">
+        <h1>Eliminar Usuario</h1>
+        <p>¿Seguro que deseas eliminar al usuario <strong>{{ usuario.username }}</strong> ({{ usuario.get_role_display }})?</p>
+        <form method="post">
+          {% csrf_token %}
+          <div style="display:flex; gap:1rem; justify-content:center;">
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{% url 'usuarios' %}" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

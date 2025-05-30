@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'registros',
 ]
 
+AUTH_USER_MODEL = 'registros.Usuario'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -86,6 +88,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation

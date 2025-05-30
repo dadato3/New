@@ -387,3 +387,164 @@ html, body {
   padding: 0;
   list-style: none;
 }
+
+/* ─── User Management Styling ─── */
+
+/* Card wrapper para formulario y confirm */
+.user-form-container,
+.confirm-container {
+  background: #ffffff;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Título dentro del card */
+.user-form-container h1,
+.confirm-container h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Formulario apilado */
+.user-form,
+.confirm-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Labels destacados */
+.user-form .form-group label {
+  font-weight: 700;
+  color: #444;
+}
+
+/* Inputs y selects grandes */
+.user-form .form-group input,
+.user-form .form-group select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color .3s, box-shadow .3s;
+}
+.user-form .form-group input:focus,
+.user-form .form-group select:focus {
+  border-color: #5563DE;
+  box-shadow: 0 0 8px rgba(85, 99, 222, .3);
+  outline: none;
+}
+
+/* Botones uniformes */
+.btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .3s, transform .1s;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Botón principal */
+.btn-primary {
+  background: linear-gradient(135deg, #5563DE, #74ABE2);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(85,99,222,0.4);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #4351B5, #5D75E8);
+}
+
+/* Botón secundario (cancelar) */
+.btn-secondary {
+  background: #f0f0f0;
+  color: #555;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+/* Botón de eliminación */
+.btn-danger {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(231,76,60,0.4);
+}
+.btn-danger:hover {
+  background: linear-gradient(135deg, #c0392b, #992d22);
+}
+
+/* ─── Tabla de usuarios ─── */
+.users-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.users-table th,
+.users-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+.users-table thead {
+  background: linear-gradient(135deg, #5563DE, #74ABE2);
+}
+.users-table thead th {
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+.users-table tbody tr:nth-child(even) {
+  background: #f9f9fb;
+}
+.users-table tbody tr:hover {
+  background: #eef2fc;
+}
+.users-table .actions a {
+  margin-right: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s;
+}
+.users-table .actions a.edit {
+  color: #27ae60;
+}
+.users-table .actions a.edit:hover {
+  color: #1e874b;
+}
+.users-table .actions a.delete {
+  color: #e74c3c;
+}
+.users-table .actions a.delete:hover {
+  color: #c0392b;
+}
+
+/* Responsive: ajusta el card y tabla en móviles */
+@media (max-width: 600px) {
+  .user-form-container,
+  .confirm-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .users-table th,
+  .users-table td {
+    padding: 0.75rem 1rem;
+  }
+}

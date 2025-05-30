@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import ClienteForm, VentaForm
+from .forms import ClienteForm, VentaForm, UsuarioCreationForm, UsuarioChangeForm
 from datetime import date
 from django.db.models import Q
-from .models import Venta, Cliente
+from .models import Venta, Cliente, Usuario
 
 @login_required
 def dashboard(request):
@@ -109,4 +109,48 @@ def eliminar_cliente(request, telefono):
         return redirect('clientes_home')
     return render(request, 'registros/cliente_confirm_delete.html', {
         'cliente': cliente
+    })
+
+@login_required
+def usuarios(request):
+    qs = Usuario.objects.all().order_by('username')
+    return render(request, 'registros/usuarios.html', {'usuarios': qs})
+
+@login_required
+def crear_usuario(request):
+    if request.method == 'POST':
+        form = UsuarioCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('usuarios')
+    else:
+        form = UsuarioCreationForm()
+    return render(request, 'registros/usuario_form.html', {
+        'form': form,
+        'titulo': 'Crear Usuario'
+    })
+
+@login_required
+def modificar_usuario(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == 'POST':
+        form = UsuarioChangeForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect('usuarios')
+    else:
+        form = UsuarioChangeForm(instance=usuario)
+    return render(request, 'registros/usuario_form.html', {
+        'form': form,
+        'titulo': 'Modificar Usuario'
+    })
+
+@login_required
+def eliminar_usuario(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == 'POST':
+        usuario.delete()
+        return redirect('usuarios')
+    return render(request, 'registros/usuario_confirm_delete.html', {
+        'usuario': usuario
     })

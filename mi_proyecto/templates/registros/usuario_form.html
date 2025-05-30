@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ titulo }}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="app-container">
+    {% include 'includes/sidebar.html' %}
+
+    <div class="content">
+      <!-- Formulario de Usuario en Tarjeta Centrada -->
+      <div class="user-form-container" style="max-width:500px; margin:2rem auto;">
+        <div class="card-header" style="text-align:center; margin-bottom:1.5rem;">
+          <h1 style="font-size:2rem; color:#2c3e50;">{{ titulo }}</h1>
+          <a href="{% url 'usuarios' %}" class="btn btn-secondary btn-sm">← Volver</a>
+        </div>
+        <form method="post" class="user-form" style="display:flex; flex-direction:column; gap:1.5rem;">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+
+          <!-- Usuario -->
+          <div class="form-group">
+            <label for="id_username">Usuario</label>
+            <input
+              type="text"
+              id="id_username"
+              name="username"
+              class="form-control form-control-lg"
+              placeholder="Ej. juan_perez"
+              value="{{ form.username.value|default_if_none:'' }}"
+              required
+              style="border-radius:8px; padding:0.8rem;"
+            />
+            {{ form.username.errors }}
+          </div>
+
+          <!-- Rol -->
+          <div class="form-group">
+            <label for="id_role">Rol</label>
+            <select
+              id="id_role"
+              name="role"
+              class="form-control form-control-lg"
+              required
+              style="border-radius:8px; padding:0.8rem;"
+            >
+              <option value="" disabled {% if not form.role.value %}selected{% endif %}>Selecciona un rol</option>
+              <option value="tecnico" {% if form.role.value == 'tecnico' %}selected{% endif %}>Técnico</option>
+              <option value="ayudante" {% if form.role.value == 'ayudante' %}selected{% endif %}>Ayudante</option>
+              <option value="administrador" {% if form.role.value == 'administrador' %}selected{% endif %}>Administrador</option>
+            </select>
+            {{ form.role.errors }}
+          </div>
+
+          {% if form.password1 %}
+          <!-- Contraseña -->
+          <div class="form-group">
+            <label for="id_password1">Contraseña</label>
+            <input
+              type="password"
+              id="id_password1"
+              name="password1"
+              class="form-control form-control-lg"
+              placeholder="Introduce la contraseña"
+              required
+              style="border-radius:8px; padding:0.8rem;"
+            />
+            {{ form.password1.errors }}
+          </div>
+          <!-- Confirmar Contraseña -->
+          <div class="form-group">
+            <label for="id_password2">Confirmar Contraseña</label>
+            <input
+              type="password"
+              id="id_password2"
+              name="password2"
+              class="form-control form-control-lg"
+              placeholder="Repite la contraseña"
+              required
+              style="border-radius:8px; padding:0.8rem;"
+            />
+            {{ form.password2.errors }}
+          </div>
+          {% endif %}
+
+          <!-- Acciones de Formulario -->
+          <div class="form-buttons" style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1rem;">
+            <button type="submit" class="btn btn-primary btn-lg" style="border-radius:8px; padding:0.7rem 1.5rem;">{{ titulo }}</button>
+            <button type="reset" class="btn btn-secondary btn-lg" style="border-radius:8px; padding:0.7rem 1.5rem;">Limpiar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

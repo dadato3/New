@@ -3,24 +3,60 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Dashboard</title>
+  <title>Gestión de Usuarios</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
   <div class="app-container">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-      <ul>
-        <li><a href="#">Ventas</a></li>
-        <li><a href="#">Registros</a></li>
-        <li><a href="#">Clientes</a></li>
-        <li><a href="#">Usuarios</a></li>
-      </ul>
-    </nav>
-    <!-- Contenido -->
+    {% include 'includes/sidebar.html' %}
+
     <div class="content">
-      <h1>Bienvenido al Dashboard</h1>
-      <p>Selecciona una opción del menú para comenzar.</p>
+      <!-- Encabezado de página -->
+      <div class="content-header" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;">
+        <h1 style="font-size:2.4rem; color:#2c3e50;">Gestión de Usuarios</h1>
+        <a href="{% url 'crear_usuario' %}" class="btn btn-primary">+ Nuevo Usuario</a>
+      </div>
+
+      <!-- Contenedor de la tabla con estilo de tarjeta -->
+      <div class="users-card" style="background:#fff; padding:1.5rem; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+        <table class="users-table" style="width:100%; text-align:center;">
+          <thead>
+            <tr>
+              <th style="width:40%;">Usuario</th>
+              <th style="width:30%;">Rol</th>
+              <th style="width:30%;">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in usuarios %}
+            <tr>
+              <td>
+                <div style="display:flex; justify-content:center; align-items:center; gap:0.5rem;">
+                  <strong style="color:#34495e;">{{ user.username }}</strong>
+                </div>
+              </td>
+              <td>
+                <div style="display:flex; justify-content:center;">
+                  <span class="badge badge-{{ user.role }}" style="padding:0.4rem 0.8rem; text-transform:capitalize; display:inline-block;">
+                    {{ user.get_role_display }}
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div style="display:flex; justify-content:center; gap:0.5rem;">
+                  <a href="{% url 'modificar_usuario' user.pk %}" class="btn btn-secondary btn-sm">Editar</a>
+                  <a href="{% url 'eliminar_usuario'  user.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3" style="padding:1rem; color:#888; text-align:center;">No hay usuarios registrados.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </body>

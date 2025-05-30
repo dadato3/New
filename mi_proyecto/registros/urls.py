@@ -7,6 +7,11 @@ urlpatterns = [
     path('ventas/',views.ventas,    name='ventas'),
     path('clientes/', views.clientes, name='clientes'),
     path('usuarios/',views.usuarios,  name='usuarios'),
+    #subruta usuarios
+    path('crear/',                  views.crear_usuario,     name='crear_usuario'),
+    path('modificar/<int:pk>/',     views.modificar_usuario, name='modificar_usuario'),
+    path('eliminar/<int:pk>/',      views.eliminar_usuario,  name='eliminar_usuario'),
+    # … tus otras rutas como ventas, registros, clientes…
     #sub rutas
     path('clientes/',                  views.clientes,           name='clientes_home'),
     path('clientes/crear/',            views.crear_cliente,      name='crear_cliente'),

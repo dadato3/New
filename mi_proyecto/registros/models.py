@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class Registro(models.Model):
     nombre     = models.CharField(max_length=100)
@@ -28,3 +29,20 @@ class Cliente(models.Model):
 
     def __str__(self):
         return f"{self.nombre} ({self.fecha})"
+
+class Usuario(AbstractUser):
+    ROLE_TECNICO      = 'tecnico'
+    ROLE_AYUDANTE     = 'ayudante'
+    ROLE_ADMIN        = 'administrador'
+    ROLE_CHOICES = [
+        (ROLE_TECNICO,   'Técnico'),
+        (ROLE_AYUDANTE,  'Ayudante'),
+        (ROLE_ADMIN,     'Administrador'),
+    ]
+
+    role = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default=ROLE_TECNICO,
+        verbose_name='Rol'
+    )
